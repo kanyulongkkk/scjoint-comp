@@ -40,14 +40,14 @@ class TrainingProcessStage1():
         # initialize dataset
         if self.config.use_cuda:
             self.model_encoder = torch.nn.DataParallel(
-                Net_encoder(config.input_size).to(self.config.device))
+                Net_encoder(config.input_size, config.embedding_size).to(self.config.device))
             self.model_cell = torch.nn.DataParallel(
-                Net_cell(config.number_of_class).to(self.config.device))
+                Net_cell(config.number_of_class, config.embedding_size).to(self.config.device))
         else:
             self.model_encoder = Net_encoder(
-                config.input_size).to(self.config.device)
+                config.input_size, config.embedding_size).to(self.config.device)
             self.model_cell = Net_cell(
-                config.number_of_class).to(self.config.device)
+                config.number_of_class, config.embedding_size).to(self.config.device)
 
         # initialize criterion (loss)
         self.criterion_cell = CellLoss()

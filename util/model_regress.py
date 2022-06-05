@@ -3,14 +3,13 @@ import torch.nn as nn
 
 
 class Net_encoder(nn.Module):
-    def __init__(self, input_size):
+    def __init__(self, input_size, dim=64):
         super(Net_encoder, self).__init__()
         self.input_size = input_size
-        self.k = 64
-        self.f = 64
+        self.dim = dim
 
         self.encoder = nn.Sequential(
-            nn.Linear(self.input_size, 64)
+            nn.Linear(self.input_size, self.dim)
 
         )
 
@@ -22,10 +21,10 @@ class Net_encoder(nn.Module):
 
 
 class Net_cell(nn.Module):
-    def __init__(self, num_of_class):
+    def __init__(self, num_of_class, dim=64):
         super(Net_cell, self).__init__()
         self.cell = nn.Sequential(
-            nn.Linear(64, num_of_class)
+            nn.Linear(dim, num_of_class)
 
         )
 
